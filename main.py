@@ -4,10 +4,13 @@ import os
 
 args = sys.argv  # we get the list of arguments from command line
 # print('Arguments:', args)
-if len(args) == 3:
+if len(args) >= 2 and '-sortIntegers' in args:
+    data_type = 'sort_integers'
+elif len(args) == 3:
     if args[1] == '-dataType':
         if args[2] in ['long', 'line', 'word']:
             data_type = args[2]
+
 
 
 # reading input
@@ -70,7 +73,19 @@ match data_type:
                     longest_word_count += 1
         print(f'Total words: {total_words}.')
         print(f'The longest word: {longest_word} ({longest_word_count} time(s){longest_word_count/total_words:.0%}).')
+    case 'sort_integers':
+        # print('sort')
+        list_of_integers = []
+        for line in list_of_lines:
+            line_split = line.split()
+            list_of_integers.extend([int(x) for x in line_split])
+        # print(list_of_integers)
+        print(f'Total numbers: {len(list_of_integers)}.')
 
-
+        sorted_list = sorted(list_of_integers)
+        sorted_list_string = ''
+        for number in sorted_list:
+            sorted_list_string += ' ' + str(number)
+        print(f'Sorted data:{sorted_list_string}')
 
 
